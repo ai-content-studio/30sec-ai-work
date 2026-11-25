@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>30초 AI 실무소 — 무료 프롬프트 · 오피스 생존템 · 브랜드 협찬</title>
+  <meta name="description" content="퇴근 10분 전 야근을 막아주는 실무 AI 프롬프트, 무료 툴 모음, 직장인 오피스 생존템 추천 및 브랜드 협찬(PPL) 문의 허브." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F5F3EE;
+      --surface: #FFFFFF;
+      --surface-subtle: #ECE9E1;
+      --ink: #111318;
+      --ink-muted: #525866;
+      --accent: #FFE600;
+      --emerald: #059669;
+      --emerald-soft: #E6F6F0;
+      --border: #111318;
+      --border-soft: rgba(17, 19, 24, 0.14);
+      --radius: 14px;
+      --shadow-hard: 4px 4px 0 #111318;
+      --shadow-soft: 0 2px 10px rgba(17, 19, 24, 0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      padding-bottom: 72px;
+    }
+
+    .container {
+      max-width: 580px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header.site-header {
+      padding: 36px 0 24px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .brand-mark {
+      display: inline-block;
+      background: var(--ink);
+      color: #FFFFFF;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: -0.01em;
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .update-stamp {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-muted);
+    }
+
+    h1.hero-title {
+      font-size: clamp(26px, 6vw, 34px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.24;
+      margin-bottom: 10px;
+    }
+
+    .hl {
+      background: linear-gradient(transparent 56%, var(--accent) 56%);
+      padding: 0 3px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--ink-muted);
+      margin-bottom: 20px;
+    }
+
+    nav.quick-nav {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    nav.quick-nav a {
+      text-align: center;
+      text-decoration: none;
+      color: var(--ink);
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.14s ease, background-color 0.14s ease;
+    }
+
+    nav.quick-nav a:hover,
+    nav.quick-nav a:focus-visible {
+      background: var(--accent);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    /* Section Headings */
+    section.block {
+      padding: 36px 0 8px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 12px;
+    }
+
+    .section-head h2 {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--ink-muted);
+      margin-bottom: 16px;
+    }
+
+    /* Filter Tabs */
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      appearance: none;
+      background: var(--surface-subtle);
+      color: var(--ink);
+      border: 1.5px solid transparent;
+      border-radius: 999px;
+      padding: 7px 14px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.14s ease;
+    }
+
+    .filter-btn[aria-pressed="true"] {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-color: var(--ink);
+    }
+
+    .filter-btn:hover:not([aria-pressed="true"]) {
+      border-color: var(--ink);
+    }
+
+    /* Episode Cards */
+    .ep-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .ep-card {
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: var(--shadow-hard);
+      transition: transform 0.14s ease;
+    }
+
+    .ep-card[hidden] { display: none; }
+
+    .ep-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .ep-num {
+      color: var(--ink);
+      background: var(--accent);
+      padding: 2px 8px;
+      border-radius: 5px;
+    }
+
+    .ep-series {
+      color: var(--ink-muted);
+    }
+
+    .ep-title {
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+      line-height: 1.38;
+    }
+
+    .prompt-box {
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--ink);
+      white-space: pre-line;
+      margin-bottom: 12px;
+      line-height: 1.55;
+    }
+
+    .ep-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 14px;
+      border-radius: 9px;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.12s ease, background-color 0.12s ease;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: #262A34;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .btn-ghost:hover {
+      background: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    /* Gear / Affiliate List */
+    .gear-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .gear-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      background: var(--surface);
+      border: 1.5px solid var(--border-soft);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .gear-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .gear-cat {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--emerald);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin-bottom: 3px;
+    }
+
+    .gear-name {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: -0.015em;
+      margin-bottom: 3px;
+    }
+
+    .gear-why {
+      font-size: 13px;
+      color: var(--ink-muted);
+    }
+
+    .affiliate-note {
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--ink-muted);
+      line-height: 1.5;
+    }
+
+    /* Brand PPL / Sponsorship */
+    .ppl-panel {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-radius: 16px;
+      padding: 24px 20px;
+    }
+
+    .ppl-panel h2 {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .ppl-panel p.ppl-lead {
+      font-size: 14px;
+      color: #CBD5E1;
+      margin-bottom: 18px;
+    }
+
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .stat-cell {
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      padding: 12px 10px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: #94A3B8;
+      margin-bottom: 4px;
+    }
+
+    .stat-val {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .ppl-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ppl-form label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #E2E8F0;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .ppl-form input,
+    .ppl-form select {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 14px;
+    }
+
+    .ppl-form select option {
+      background: var(--ink);
+      color: #FFFFFF;
+    }
+
+    .ppl-form input::placeholder {
+      color: #94A3B8;
+    }
+
+    .btn-yellow {
+      background: var(--accent);
+      color: var(--ink);
+      border: none;
+      width: 100%;
+      padding: 12px 16px;
+      font-size: 14px;
+      font-weight: 900;
+      margin-top: 4px;
+    }
+
+    .btn-yellow:hover {
+      background: #F5DC00;
+      transform: translateY(-1px);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-soft);
+      text-align: center;
+      font-size: 12px;
+      color: var(--ink-muted);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--ink);
+      color: #FFFFFF;
+      padding: 11px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 440px) {
+      .gear-item { flex-direction: column; align-items: flex-start; }
+      .gear-item .btn { width: 100%; }
+      .stat-strip { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <div class="brand-row">
+        <span class="brand-mark">30초 AI 실무소</span>
+        <span class="update-stamp">001 – 018 업데이트</span>
+      </div>
+      <h1 class="hero-title">영상 속 <span class="hl">무료 프롬프트</span>와<br />칼퇴 생존템을 한곳에</h1>
+      <p class="hero-desc">복사 버튼 한 번으로 바로 실무에 써먹으세요. 모든 프롬프트와 무료 툴 링크는 로그인 없이 바로 열립니다.</p>
+      <nav class="quick-nav" aria-label="섹션 바로가기">
+        <a href="#prompts" id="nav-prompts">무료 프롬프트</a>
+        <a href="#gear" id="nav-gear">오피스 생존템</a>
+        <a href="#sponsor" id="nav-sponsor">협찬 · PPL 문의</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Section 1: Episode Prompts & Free Tools -->
+      <section class="block" id="prompts">
+        <div class="section-head">
+          <h2>에피소드별 프롬프트 · 무료 툴</h2>
+        </div>
+        <p class="section-sub">고정댓글에서 찾으시던 그 프롬프트, 아래에서 원클릭 복사하세요.</p>
+
+        <div class="filter-bar" role="group" aria-label="시리즈 필터">
+          <button type="button" class="filter-btn" id="filter-all" data-filter="all" aria-pressed="true">전체 (18)</button>
+          <button type="button" class="filter-btn" id="filter-ab" data-filter="ab" aria-pressed="false">칼퇴 · 무료 AI 툴 (9)</button>
+          <button type="button" class="filter-btn" id="filter-c" data-filter="c" aria-pressed="false">오피스 루틴 · 장비 (9)</button>
+        </div>
+
+        <div class="ep-list" id="episode-list">
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">001</span>
+              <span class="ep-series">시리즈 A · 회의록 10초 컷</span>
+            </div>
+            <h3 class="ep-title">ChatGPT '요약해줘' 금지! 회의록 10초 컷</h3>
+            <div class="prompt-box" id="prompt-ep01">너는 10년 차 프로젝트 매니저야. 팀장님께 바로 보고할 수 있게 정리해 줘.
+1. 핵심 결정사항 3줄 요약
+2. 담당자·마감일 포함 액션아이템 표
+3. 빠진 확인 필요 사항 2가지</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep01" data-target="prompt-ep01">프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep01">ChatGPT 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">002</span>
+              <span class="ep-series">시리즈 B · PPT 1분 초안</span>
+            </div>
+            <h3 class="ep-title">새벽 2시 PPT, 동기는 1분 컷 (무료 AI)</h3>
+            <div class="prompt-box" id="prompt-ep02">2026년 4분기 신규 서비스 런칭 전략,
+임원 보고용으로 핵심 지표 중심 10장 구성.
+각 슬라이드는 제목 1줄 + 핵심 포인트 3개 이내로 간결하게 작성해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep02" data-target="prompt-ep02">세팅 문구 복사</button>
+              <a class="btn btn-ghost" href="https://gamma.app" target="_blank" rel="noopener noreferrer" id="link-ep02">Gamma 무료 시작</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">003</span>
+              <span class="ep-series">시리즈 C · 오후 3시 각성 루틴</span>
+            </div>
+            <h3 class="ep-title">오후 3시 식곤증, 1분 보고서 각성 루틴</h3>
+            <div class="prompt-box" id="prompt-ep03">아래는 내가 말로 대충 녹음한 보고서 메모야.
+두서없는 부분을 정리해서 임원 보고용 3단 구조(배경 → 핵심 제안 → 예상 일정)로 깔끔한 초안을 써 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep03" data-target="prompt-ep03">프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep03">오후 각성 추천템 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">004</span>
+              <span class="ep-series">시리즈 C · 손목 보호 음성 입력</span>
+            </div>
+            <h3 class="ep-title">손목 아픈 야근 탈출! 말로 쓰는 1초 입력</h3>
+            <div class="prompt-box" id="prompt-ep04">단축키: Windows [Win + H] / Mac [Fn 키 2번]
+
+[다듬기 프롬프트]
+아래 음성 받아쓰기 텍스트의 오타와 구어체를 정리해서,
+정중하고 간결한 사내 슬랙·이메일 톤으로 바꿔 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep04" data-target="prompt-ep04">단축키·프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep04">손목 보호 장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">005</span>
+              <span class="ep-series">시리즈 C · 이동 중 30초 대응</span>
+            </div>
+            <h3 class="ep-title">지하철에서 20장 PDF, 폰으로 30초 컷</h3>
+            <div class="prompt-box" id="prompt-ep05">첨부한 PDF 문서에서 팀장님이 바로 보고 판단할 수 있게
+1) 핵심 결론 3줄
+2) 주요 수치·일정 비교 표
+3) 카톡/슬랙으로 바로 보낼 3줄 회신 문구
+이 순서대로 정리해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep05" data-target="prompt-ep05">프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep05">외근 필수템 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">006</span>
+              <span class="ep-series">시리즈 A · 엑셀 수식 1분 컷</span>
+            </div>
+            <h3 class="ep-title">엑셀 500줄 수식 몰라도 1분 컷</h3>
+            <div class="prompt-box" id="prompt-ep06">엑셀 시트에 A열은 날짜, B열은 부서명, C열은 매출액(2행~501행)이 있어.
+부서별 합계와 월별 평균을 구하는 SUMIFS 수식을 알려주고,
+복붙할 때 자주 나는 오류 체크 포인트 1가지만 짚어 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep06" data-target="prompt-ep06">엑셀 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep06">ChatGPT 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">007</span>
+              <span class="ep-series">시리즈 B · 원어민 비즈니스 영어</span>
+            </div>
+            <h3 class="ep-title">퇴근 20분 전 영어 메일, 10초 원어민 톤</h3>
+            <div class="prompt-box" id="prompt-ep07">아래 영어 메일 초안을 해외 거래처 담당자에게 보내는
+정중하지만 간결한 원어민 비즈니스 톤으로 다듬어 줘.
+1) 바로 복붙할 영문 본문
+2) 한국어 의역 확인본</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep07" data-target="prompt-ep07">교정 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://www.deepl.com/ko/translator" target="_blank" rel="noopener noreferrer" id="link-ep07">DeepL 무료 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">008</span>
+              <span class="ep-series">시리즈 C · 회의 3연타 5분 정리</span>
+            </div>
+            <h3 class="ep-title">회의 3연타 야근 탈출! 5분 정리 루틴</h3>
+            <div class="prompt-box" id="prompt-ep08">아래 회의 메모에서 잡담은 빼고
+1) 확정된 핵심 결정사항 3줄
+2) 담당자·마감일만 깔끔하게 정리해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep08" data-target="prompt-ep08">프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep08">회의 집중 장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">009</span>
+              <span class="ep-series">시리즈 C · 눈 피로 방지 + 3줄 요약</span>
+            </div>
+            <h3 class="ep-title">밤 9시 눈 피로 야근, 모니터 시간 반토막</h3>
+            <div class="prompt-box" id="prompt-ep09">[화면·휴식 세팅] 다크·야간모드 + 모니터 조명바 + 20분마다 20초 먼 곳 보기
+
+[AI 요약 프롬프트]
+이 긴 보고서의 핵심 결론 3줄과
+내가 확인해야 할 숫자 항목만 먼저 뽑아줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep09" data-target="prompt-ep09">세팅·프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep09">데스크 조명·장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">010</span>
+              <span class="ep-series">시리즈 C · 오후 1시 30분 타임블록</span>
+            </div>
+            <h3 class="ep-title">오후 1시 할 일 15개, 10초 타임블록</h3>
+            <div class="prompt-box" id="prompt-ep10">아래 할 일 15개를 긴급도·중요도 기준으로 나누고,
+오후 1시부터 30분 단위 타임블록으로 짜줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep10" data-target="prompt-ep10">타임블록 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep10">집중 데스크템 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">011</span>
+              <span class="ep-series">시리즈 A · 주간업무보고 10초 컷</span>
+            </div>
+            <h3 class="ep-title">금요일 4시 주간보고, 10초 불금 칼퇴</h3>
+            <div class="prompt-box" id="prompt-ep11">아래 이번 주 슬랙·업무 메모를 팀장님 보고용 주간업무보고로 정리해 줘.
+(고객 실명·기밀 숫자는 제외)
+[완료 성과 · 진행 중 · 다음 주 계획] 3단 표로 출력해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep11" data-target="prompt-ep11">3단 표 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep11">ChatGPT 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">012</span>
+              <span class="ep-series">시리즈 B · 실시간 출처 시장조사</span>
+            </div>
+            <h3 class="ep-title">검색창 30개 금지! 출처까지 1분 리서치</h3>
+            <div class="prompt-box" id="prompt-ep12">경쟁사 A·B·C 3곳의 최근 6개월 신제품·가격·마케팅 동향을
+원문 출처 링크가 달린 비교표로 정리해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep12" data-target="prompt-ep12">시장조사 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://www.perplexity.ai" target="_blank" rel="noopener noreferrer" id="link-ep12">Perplexity 무료 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">013</span>
+              <span class="ep-series">시리즈 C · 아침 메일 1분 분류</span>
+            </div>
+            <h3 class="ep-title">출근 메일 80통, 1분 자동 분류 루틴</h3>
+            <div class="prompt-box" id="prompt-ep13">아래 메일 목록을 ① 긴급 답장 ② 오늘 처리 ③ 참고용 3단계로 나누고,
+긴급 답장 건은 정중하고 짧은 답장 초안까지 써 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep13" data-target="prompt-ep13">메일 분류 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep13">모닝 루틴 장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">014</span>
+              <span class="ep-series">시리즈 C · 오후 3분 데스크 리셋</span>
+            </div>
+            <h3 class="ep-title">오후 책상 난장판, 3분 리셋 2배 집중</h3>
+            <div class="prompt-box" id="prompt-ep14">[3분 데스크 리셋] 안 쓰는 서류·케이블 수납 + 데스크패드 위 핵심 자료만 남기기
+
+[AI 체크리스트 프롬프트]
+오후에 남은 일 목록 중 오늘 꼭 끝내야 할 핵심 3가지 체크리스트와
+예상 소요 시간만 10초 안에 순서대로 뽑아 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep14" data-target="prompt-ep14">체크리스트 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep14">데스크 정리 장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="c">
+            <div class="ep-meta">
+              <span class="ep-num">015</span>
+              <span class="ep-series">시리즈 C · 퇴근 5분 전 셧다운</span>
+            </div>
+            <h3 class="ep-title">퇴근 후 일 걱정 끝! 5분 셧다운 루틴</h3>
+            <div class="prompt-box" id="prompt-ep15">내일 오전 9시 출근하자마자 1초 만에 이어할 수 있게
+① 1순위 할 일 ② 열어야 할 파일 ③ 확인할 사람
+딱 3줄 인수인계 메모로 만들어 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep15" data-target="prompt-ep15">3줄 메모 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="#gear" id="link-ep15">퇴근 루틴 장비 보기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">016</span>
+              <span class="ep-series">시리즈 A · 1페이지 기획안 30초 컷</span>
+            </div>
+            <h3 class="ep-title">1장 기획서, 30초 4단 초안 공식</h3>
+            <div class="prompt-box" id="prompt-ep16">새 프로젝트 주제와 목표 타겟을 바탕으로
+배경·목표·실행안·기대효과 4단 구조 1페이지 기획안 초안 써줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep16" data-target="prompt-ep16">4단 기획안 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep16">ChatGPT 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">017</span>
+              <span class="ep-series">시리즈 B · 세미나 10초 5줄 요약</span>
+            </div>
+            <h3 class="ep-title">1시간 세미나 영상, 10초 5줄 보고서</h3>
+            <div class="prompt-box" id="prompt-ep17">이 세미나 스크립트의 핵심 결론 5줄과
+우리 팀 적용 포인트 3가지를 보고서 형식으로 정리해 줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep17" data-target="prompt-ep17">5줄 요약 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep17">ChatGPT 열기</a>
+            </div>
+          </article>
+
+          <article class="ep-card" data-group="ab">
+            <div class="ep-meta">
+              <span class="ep-num">018</span>
+              <span class="ep-series">시리즈 A · 컴플레인 3단 답장</span>
+            </div>
+            <h3 class="ep-title">거래처 컴플레인 메일, 10초 정중 답장</h3>
+            <div class="prompt-box" id="prompt-ep18">아래 거래처 메일에 대해 감정과 변명은 빼고,
+① 정중한 사과 ② 간단한 사실 ③ 구체적 대안 3단 답장 써줘.</div>
+            <div class="ep-actions">
+              <button type="button" class="btn btn-primary copy-btn" id="copy-ep18" data-target="prompt-ep18">3단 답장 프롬프트 복사</button>
+              <a class="btn btn-ghost" href="https://chatgpt.com" target="_blank" rel="noopener noreferrer" id="link-ep18">ChatGPT 열기</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Section 2: Office Survival Gear (Affiliate Slots) -->
+      <section class="block" id="gear">
+        <div class="section-head">
+          <h2>직장인 오피스 생존템 (제휴 추천)</h2>
+        </div>
+        <p class="section-sub">영상 속 실무 루틴에서 실제로 자주 묻는 장비만 추렸습니다. (아래 링크에 쿠팡파트너스·제휴 URL 연결)</p>
+
+        <div class="gear-list">
+          <div class="gear-item">
+            <div class="gear-info">
+              <div class="gear-cat">EP.03 · 오후 각성 루틴</div>
+              <div class="gear-name">저당 콜드브루 / 직장인 텀블러</div>
+              <div class="gear-why">오후 3시 식곤증 방어 + 책상 위 결로 없는 보냉</div>
+            </div>
+            <a href="#sponsor" class="btn btn-ghost" id="aff-coffee" data-slot="affiliate-coffee">추천 링크 연결</a>
+          </div>
+
+          <div class="gear-item">
+            <div class="gear-info">
+              <div class="gear-cat">EP.04 · 손목 보호 세팅</div>
+              <div class="gear-name">버티컬 마우스 &amp; 저소음 키보드</div>
+              <div class="gear-why">하루 8시간 타이핑·클릭 시 손목 꺾임 최소화</div>
+            </div>
+            <a href="#sponsor" class="btn btn-ghost" id="aff-ergo" data-slot="affiliate-ergo">추천 링크 연결</a>
+          </div>
+
+          <div class="gear-item">
+            <div class="gear-info">
+              <div class="gear-cat">EP.04 · 거북목 방지</div>
+              <div class="gear-name">각도 조절 알루미늄 노트북 거치대</div>
+              <div class="gear-why">시선 높이만 맞춰도 오후 어깨 결림 절반 감소</div>
+            </div>
+            <a href="#sponsor" class="btn btn-ghost" id="aff-stand" data-slot="affiliate-stand">추천 링크 연결</a>
+          </div>
+
+          <div class="gear-item">
+            <div class="gear-info">
+              <div class="gear-cat">EP.05 · 외근 · 출근길 대응</div>
+              <div class="gear-name">노이즈캔슬링 이어폰 &amp; 초슬림 보조배터리</div>
+              <div class="gear-why">지하철·카페에서 AI 음성 입력과 급한 자료 처리 필수템</div>
+            </div>
+            <a href="#sponsor" class="btn btn-ghost" id="aff-mobile" data-slot="affiliate-mobile">추천 링크 연결</a>
+          </div>
+        </div>
+
+        <p class="affiliate-note">※ 제휴 링크 연결 시: 이 페이지의 일부 링크는 제휴 마케팅 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
+      </section>
+
+      <!-- Section 3: Brand Sponsorship / PPL Inquiry -->
+      <section class="block" id="sponsor">
+        <div class="ppl-panel">
+          <h2>브랜드 협찬(PPL) · 비즈니스 문의</h2>
+          <p class="ppl-lead">직장인 공감 상황극 안에 제품이 자연스럽게 녹아드는 숏츠 브랜디드 콘텐츠를 제작합니다.</p>
+
+          <div class="stat-strip">
+            <div class="stat-cell">
+              <div class="stat-label">핵심 시청층</div>
+              <div class="stat-val">25–39세 직장인</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-label">적합 브랜드군</div>
+              <div class="stat-val">오피스·커피·IT·SaaS</div>
+            </div>
+            <div class="stat-cell">
+              <div class="stat-label">브랜드 안전</div>
+              <div class="stat-val">비속어·과장 0%</div>
+            </div>
+          </div>
+
+          <form class="ppl-form" id="ppl-inquiry-form">
+            <div>
+              <label for="brand-name">브랜드 / 담당자명</label>
+              <input type="text" id="brand-name" name="brand" placeholder="예: OO커피 마케팅팀 김OO" required />
+            </div>
+            <div>
+              <label for="brand-cat">제품 카테고리</label>
+              <select id="brand-cat" name="category">
+                <option value="커피·음료·영양제">커피 · 에너지드링크 · 영양제</option>
+                <option value="키보드·마우스·데스크테리어">키보드 · 마우스 · 데스크테리어</option>
+                <option value="노트북·모니터·모바일기기">노트북 · 모니터 · 모바일 기기</option>
+                <option value="AI·생산성 앱 / SaaS / 교육">AI · 생산성 앱 / SaaS / 교육</option>
+                <option value="기타 직장인 라이프스타일">기타 직장인 라이프스타일</option>
+              </select>
+            </div>
+            <div>
+              <label for="brand-note">희망 일정 및 한 줄 소개</label>
+              <input type="text" id="brand-note" name="note" placeholder="예: 12월 중순 숏츠 1편 + 고정댓글 링크 연동 희망" />
+            </div>
+            <button type="submit" class="btn btn-yellow" id="submit-ppl-btn">협찬 문의 초안 복사하기</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© 2026 30초 AI 실무소 · All Rights Reserved</p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">복사되었습니다!</div>
+
+  <script>
+    (function () {
+      const toast = document.getElementById('toast');
+      let toastTimer = null;
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+      }
+
+      async function copyText(text, successMsg) {
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast(successMsg);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          showToast(successMsg);
+        }
+      }
+
+      // Filter buttons
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const epCards = document.querySelectorAll('.ep-card');
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const target = btn.dataset.filter;
+          filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+          epCards.forEach((card) => {
+            const match = target === 'all' || card.dataset.group === target;
+            card.hidden = !match;
+          });
+        });
+      });
+
+      // Prompt copy buttons
+      document.querySelectorAll('.copy-btn').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const box = document.getElementById(btn.dataset.target);
+          if (!box) return;
+          copyText(box.textContent.trim(), '프롬프트가 클립보드에 복사되었습니다!');
+        });
+      });
+
+      // PPL inquiry form -> copy structured brief for email
+      const form = document.getElementById('ppl-inquiry-form');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const brand = document.getElementById('brand-name').value.trim();
+        const cat = document.getElementById('brand-cat').value;
+        const note = document.getElementById('brand-note').value.trim() || '(일정 협의 희망)';
+        const draft = [
+          '[30초 AI 실무소 협찬/PPL 문의]',
+          `• 브랜드/담당자: ${brand}`,
+          `• 카테고리: ${cat}`,
+          `• 희망 내용: ${note}`,
+        ].join('\n');
+        copyText(draft, '문의 초안이 복사되었습니다! 채널 이메일로 보내주세요.');
+      });
+    })();
+  </script>
+</body>
+</html>
