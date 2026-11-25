@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>30초 AI 실무소 — 무료 프롬프트 · 오피스 생존템 · 브랜드 협찬</title>
-  <meta name="description" content="퇴근 10분 전 야근을 막아주는 실무 AI 프롬프트, 무료 툴 모음, 직장인 오피스 생존템 추천 및 브랜드 협찬(PPL) 문의 허브." />
+  <title>30초 AI 실무소 — 영상 번호로 무료 프롬프트 바로 찾기</title>
+  <meta name="description" content="영상 속 번호만 입력하면 해당 무료 AI 프롬프트와 툴 링크가 바로 뜹니다. 30초 AI 실무소 공식 허브." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
@@ -17,453 +17,227 @@
       --ink-muted: #525866;
       --accent: #FFE600;
       --emerald: #059669;
-      --emerald-soft: #E6F6F0;
       --border: #111318;
       --border-soft: rgba(17, 19, 24, 0.14);
       --radius: 14px;
       --shadow-hard: 4px 4px 0 #111318;
-      --shadow-soft: 0 2px 10px rgba(17, 19, 24, 0.06);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg);
       color: var(--ink);
       line-height: 1.55;
       -webkit-font-smoothing: antialiased;
-      padding-bottom: 72px;
+      padding-bottom: 64px;
     }
+    .container { max-width: 580px; margin: 0 auto; padding: 0 20px; }
 
-    .container {
-      max-width: 580px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Header */
     header.site-header {
-      padding: 36px 0 24px;
+      padding: 28px 0 24px;
       border-bottom: 2px solid var(--border);
     }
-
     .brand-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .brand-mark {
-      display: inline-block;
-      background: var(--ink);
-      color: #FFFFFF;
-      font-weight: 900;
-      font-size: 13px;
-      letter-spacing: -0.01em;
-      padding: 6px 12px;
-      border-radius: 6px;
-    }
-
-    .update-stamp {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--ink-muted);
-    }
-
-    h1.hero-title {
-      font-size: clamp(26px, 6vw, 34px);
-      font-weight: 900;
-      letter-spacing: -0.03em;
-      line-height: 1.24;
-      margin-bottom: 10px;
-    }
-
-    .hl {
-      background: linear-gradient(transparent 56%, var(--accent) 56%);
-      padding: 0 3px;
-    }
-
-    .hero-desc {
-      font-size: 15px;
-      color: var(--ink-muted);
-      margin-bottom: 20px;
-    }
-
-    nav.quick-nav {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-    }
-
-    nav.quick-nav a {
-      text-align: center;
-      text-decoration: none;
-      color: var(--ink);
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      padding: 10px 8px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: transform 0.14s ease, background-color 0.14s ease;
-    }
-
-    nav.quick-nav a:hover,
-    nav.quick-nav a:focus-visible {
-      background: var(--accent);
-      transform: translateY(-2px);
-      outline: none;
-    }
-
-    /* Section Headings */
-    section.block {
-      padding: 36px 0 8px;
-    }
-
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 14px;
-      gap: 12px;
-    }
-
-    .section-head h2 {
-      font-size: 21px;
-      font-weight: 900;
-      letter-spacing: -0.025em;
-    }
-
-    .section-sub {
-      font-size: 13px;
-      color: var(--ink-muted);
+      display: flex; align-items: center; justify-content: space-between;
       margin-bottom: 16px;
     }
-
-    /* Filter Tabs */
-    .filter-bar {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+    .brand-mark {
+      display: inline-block; background: var(--ink); color: #FFFFFF;
+      font-weight: 900; font-size: 13px; padding: 6px 12px; border-radius: 6px;
     }
+    .update-stamp { font-size: 12px; font-weight: 700; color: var(--ink-muted); }
 
-    .filter-btn {
-      appearance: none;
-      background: var(--surface-subtle);
-      color: var(--ink);
-      border: 1.5px solid transparent;
-      border-radius: 999px;
-      padding: 7px 14px;
+    h1.hero-title {
+      font-size: clamp(24px, 6vw, 32px);
+      font-weight: 900; letter-spacing: -0.03em; line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .hl { background: linear-gradient(transparent 56%, var(--accent) 56%); padding: 0 3px; }
+    .hero-desc { font-size: 14px; color: var(--ink-muted); margin-bottom: 18px; }
+
+    /* Episode Number Jump Box */
+    .jump-box {
+      display: flex; gap: 8px; margin-bottom: 12px;
+    }
+    .jump-input {
+      flex: 1;
+      min-width: 0;
+      height: 50px;
+      padding: 0 16px;
       font-family: inherit;
-      font-size: 13px;
+      font-size: 16px;
       font-weight: 700;
-      cursor: pointer;
-      transition: all 0.14s ease;
+      color: var(--ink);
+      background: var(--surface);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      outline: none;
     }
+    .jump-input:focus { box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.55); }
+    .jump-btn {
+      height: 50px;
+      padding: 0 20px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 900;
+      background: var(--accent);
+      color: var(--ink);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 3px 3px 0 var(--border);
+      transition: transform 0.12s ease;
+    }
+    .jump-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--border); }
 
-    .filter-btn[aria-pressed="true"] {
+    .quick-chips {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+      font-size: 12px; color: var(--ink-muted);
+    }
+    .chip {
+      background: var(--surface);
+      border: 1.5px solid var(--border-soft);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--ink); background: var(--accent); }
+
+    /* Search Result Banner */
+    .active-banner {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
       background: var(--ink);
       color: #FFFFFF;
-      border-color: var(--ink);
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin: 20px 0 14px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .active-banner.show { display: flex; }
+    .reset-btn {
+      background: var(--accent); color: var(--ink);
+      border: none; border-radius: 8px; padding: 6px 12px;
+      font-family: inherit; font-size: 12px; font-weight: 900; cursor: pointer;
     }
 
-    .filter-btn:hover:not([aria-pressed="true"]) {
-      border-color: var(--ink);
+    .empty-msg {
+      display: none;
+      text-align: center;
+      background: var(--surface);
+      border: 1.5px dashed var(--border-soft);
+      border-radius: var(--radius);
+      padding: 28px 16px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--ink-muted);
+    }
+    .empty-msg.show { display: block; }
+
+    section.block { padding: 24px 0 8px; }
+    .section-head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .section-head h2 { font-size: 19px; font-weight: 900; letter-spacing: -0.025em; }
+    .sponsor-jump {
+      font-size: 12px; font-weight: 700; color: var(--ink-muted); text-decoration: underline;
     }
 
-    /* Episode Cards */
-    .ep-list {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    .filter-btn {
+      appearance: none; background: var(--surface-subtle); color: var(--ink);
+      border: 1.5px solid transparent; border-radius: 999px;
+      padding: 6px 13px; font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
     }
+    .filter-btn[aria-pressed="true"] { background: var(--ink); color: #FFFFFF; border-color: var(--ink); }
 
+    .ep-list { display: flex; flex-direction: column; gap: 14px; }
     .ep-card {
       background: var(--surface);
       border: 2px solid var(--border);
       border-radius: var(--radius);
       padding: 18px;
       box-shadow: var(--shadow-hard);
-      transition: transform 0.14s ease;
     }
-
     .ep-card[hidden] { display: none; }
+    .ep-card.focused { box-shadow: 0 0 0 4px var(--accent), var(--shadow-hard); }
 
     .ep-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 12px;
-      font-weight: 700;
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 8px; font-size: 12px; font-weight: 700;
     }
-
     .ep-num {
-      color: var(--ink);
-      background: var(--accent);
-      padding: 2px 8px;
-      border-radius: 5px;
+      color: var(--ink); background: var(--accent);
+      padding: 3px 9px; border-radius: 6px; font-weight: 900;
     }
-
-    .ep-series {
-      color: var(--ink-muted);
-    }
-
+    .ep-series { color: var(--ink-muted); }
     .ep-title {
-      font-size: 16px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      margin-bottom: 10px;
-      line-height: 1.38;
+      font-size: 16px; font-weight: 900; letter-spacing: -0.02em;
+      margin-bottom: 10px; line-height: 1.38;
     }
-
     .prompt-box {
-      background: var(--bg);
-      border: 1px solid var(--border-soft);
-      border-radius: 10px;
-      padding: 12px 14px;
-      font-size: 13px;
-      color: var(--ink);
-      white-space: pre-line;
-      margin-bottom: 12px;
-      line-height: 1.55;
+      background: var(--bg); border: 1px solid var(--border-soft);
+      border-radius: 10px; padding: 12px 14px; font-size: 13px;
+      color: var(--ink); white-space: pre-line; margin-bottom: 12px; line-height: 1.55;
     }
-
-    .ep-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
+    .ep-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      font-family: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 9px 14px;
-      border-radius: 9px;
-      border: 1.5px solid var(--border);
-      cursor: pointer;
-      text-decoration: none;
-      transition: transform 0.12s ease, background-color 0.12s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      font-family: inherit; font-size: 13px; font-weight: 700;
+      padding: 9px 14px; border-radius: 9px; border: 1.5px solid var(--border);
+      cursor: pointer; text-decoration: none;
     }
-
-    .btn-primary {
-      background: var(--ink);
-      color: #FFFFFF;
-    }
-
-    .btn-primary:hover {
-      background: #262A34;
-      transform: translateY(-1px);
-    }
-
-    .btn-ghost {
-      background: var(--surface);
-      color: var(--ink);
-    }
-
-    .btn-ghost:hover {
-      background: var(--accent);
-      transform: translateY(-1px);
-    }
-
-    /* Gear / Affiliate List */
-    .gear-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .gear-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      background: var(--surface);
-      border: 1.5px solid var(--border-soft);
-      border-radius: var(--radius);
-      padding: 16px;
-      box-shadow: var(--shadow-soft);
-    }
-
-    .gear-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .gear-cat {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--emerald);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 3px;
-    }
-
-    .gear-name {
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: -0.015em;
-      margin-bottom: 3px;
-    }
-
-    .gear-why {
-      font-size: 13px;
-      color: var(--ink-muted);
-    }
-
-    .affiliate-note {
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--ink-muted);
-      line-height: 1.5;
-    }
+    .btn-primary { background: var(--ink); color: #FFFFFF; }
+    .btn-ghost { background: var(--surface); color: var(--ink); }
+    .btn-ghost:hover { background: var(--accent); }
 
     /* Brand PPL / Sponsorship */
     .ppl-panel {
-      background: var(--ink);
-      color: #FFFFFF;
-      border-radius: 16px;
-      padding: 24px 20px;
+      background: var(--ink); color: #FFFFFF; border-radius: 16px; padding: 24px 20px;
+      margin-top: 12px;
     }
-
-    .ppl-panel h2 {
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-
-    .ppl-panel p.ppl-lead {
-      font-size: 14px;
-      color: #CBD5E1;
-      margin-bottom: 18px;
-    }
-
+    .ppl-panel h2 { font-size: 19px; font-weight: 900; margin-bottom: 8px; }
+    .ppl-lead { font-size: 13px; color: #CBD5E1; margin-bottom: 16px; }
     .stat-strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 18px;
     }
-
-    .stat-cell {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 10px;
-      padding: 12px 10px;
-    }
-
-    .stat-label {
-      font-size: 11px;
-      color: #94A3B8;
-      margin-bottom: 4px;
-    }
-
-    .stat-val {
-      font-size: 13px;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .ppl-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .ppl-form label {
-      font-size: 12px;
-      font-weight: 700;
-      color: #E2E8F0;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .ppl-form input,
-    .ppl-form select {
-      width: 100%;
-      padding: 10px 12px;
-      border-radius: 9px;
-      border: 1px solid rgba(255, 255, 255, 0.22);
-      background: rgba(255, 255, 255, 0.08);
-      color: #FFFFFF;
-      font-family: inherit;
-      font-size: 14px;
-    }
-
-    .ppl-form select option {
-      background: var(--ink);
-      color: #FFFFFF;
-    }
-
-    .ppl-form input::placeholder {
-      color: #94A3B8;
-    }
-
+    .stat-cell { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; }
+    .stat-label { font-size: 11px; color: #94A3B8; margin-bottom: 3px; }
+    .stat-val { font-size: 12px; font-weight: 800; color: var(--accent); }
+    .ppl-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .btn-yellow {
-      background: var(--accent);
-      color: var(--ink);
-      border: none;
-      width: 100%;
-      padding: 12px 16px;
-      font-size: 14px;
-      font-weight: 900;
-      margin-top: 4px;
+      background: var(--accent); color: var(--ink); border: none;
+      flex: 1; min-width: 180px; padding: 12px 14px; font-size: 14px; font-weight: 900;
+    }
+    .btn-outline-light {
+      background: transparent; color: #FFFFFF;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      padding: 12px 14px; font-size: 13px; font-weight: 700;
     }
 
-    .btn-yellow:hover {
-      background: #F5DC00;
-      transform: translateY(-1px);
-    }
-
-    /* Footer */
     footer.site-footer {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid var(--border-soft);
-      text-align: center;
-      font-size: 12px;
-      color: var(--ink-muted);
+      margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--border-soft);
+      text-align: center; font-size: 12px; color: var(--ink-muted);
     }
-
-    /* Toast */
     .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 24px;
+      position: fixed; left: 50%; bottom: 24px;
       transform: translateX(-50%) translateY(20px);
-      background: var(--ink);
-      color: #FFFFFF;
-      padding: 11px 18px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      z-index: 100;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.24);
+      background: var(--ink); color: #FFFFFF; padding: 11px 18px;
+      border-radius: 999px; font-size: 13px; font-weight: 700;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s, transform 0.2s; z-index: 100;
     }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @media (max-width: 440px) {
-      .gear-item { flex-direction: column; align-items: flex-start; }
-      .gear-item .btn { width: 100%; }
-      .stat-strip { grid-template-columns: 1fr; }
-    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    @media (max-width: 440px) { .stat-strip { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -471,35 +245,59 @@
     <header class="site-header">
       <div class="brand-row">
         <span class="brand-mark">30초 AI 실무소</span>
-        <span class="update-stamp">001 – 018 업데이트</span>
+        <span class="update-stamp">#001 – #018</span>
       </div>
-      <h1 class="hero-title">영상 속 <span class="hl">무료 프롬프트</span>와<br />칼퇴 생존템을 한곳에</h1>
-      <p class="hero-desc">복사 버튼 한 번으로 바로 실무에 써먹으세요. 모든 프롬프트와 무료 툴 링크는 로그인 없이 바로 열립니다.</p>
-      <nav class="quick-nav" aria-label="섹션 바로가기">
-        <a href="#prompts" id="nav-prompts">무료 프롬프트</a>
-        <a href="#gear" id="nav-gear">오피스 생존템</a>
-        <a href="#sponsor" id="nav-sponsor">협찬 · PPL 문의</a>
-      </nav>
+      <h1 class="hero-title">영상 <span class="hl">번호</span>만 입력하면<br />프롬프트가 바로 뜹니다</h1>
+      <p class="hero-desc">유튜브 제목 앞 <strong>[001]</strong> 번호나 키워드(예: 엑셀, PPT)를 입력하세요.</p>
+
+      <form class="jump-box" id="jump-form" role="search">
+        <input
+          type="text"
+          id="ep-search"
+          class="jump-input"
+          inputmode="search"
+          placeholder="영상 번호 (예: 001, 12) 또는 키워드"
+          autocomplete="off"
+        />
+        <button type="submit" class="jump-btn" id="jump-submit">바로 찾기</button>
+      </form>
+
+      <div class="quick-chips" aria-label="빠른 번호 이동">
+        <span>최근 번호:</span>
+        <button type="button" class="chip" data-jump="001">#001</button>
+        <button type="button" class="chip" data-jump="002">#002</button>
+        <button type="button" class="chip" data-jump="006">#006</button>
+        <button type="button" class="chip" data-jump="012">#012</button>
+        <button type="button" class="chip" data-jump="018">#018</button>
+      </div>
     </header>
 
     <main>
-      <!-- Section 1: Episode Prompts & Free Tools -->
-      <section class="block" id="prompts">
-        <div class="section-head">
-          <h2>에피소드별 프롬프트 · 무료 툴</h2>
-        </div>
-        <p class="section-sub">고정댓글에서 찾으시던 그 프롬프트, 아래에서 원클릭 복사하세요.</p>
+      <div class="active-banner" id="active-banner">
+        <span id="active-banner-text">#001 결과</span>
+        <button type="button" class="reset-btn" id="reset-search">전체 보기 (18)</button>
+      </div>
 
-        <div class="filter-bar" role="group" aria-label="시리즈 필터">
-          <button type="button" class="filter-btn" id="filter-all" data-filter="all" aria-pressed="true">전체 (18)</button>
-          <button type="button" class="filter-btn" id="filter-ab" data-filter="ab" aria-pressed="false">칼퇴 · 무료 AI 툴 (9)</button>
-          <button type="button" class="filter-btn" id="filter-c" data-filter="c" aria-pressed="false">오피스 루틴 · 장비 (9)</button>
+      <section class="block" id="prompts">
+        <div class="section-head" id="list-header">
+          <h2>전체 프롬프트 · 무료 툴</h2>
+          <a href="#sponsor" class="sponsor-jump">협찬 · PPL 문의</a>
+        </div>
+
+        <div class="filter-bar" id="filter-bar" role="group" aria-label="시리즈 필터">
+          <button type="button" class="filter-btn" data-filter="all" aria-pressed="true">전체 (18)</button>
+          <button type="button" class="filter-btn" data-filter="ab" aria-pressed="false">칼퇴 · 무료 AI 툴 (9)</button>
+          <button type="button" class="filter-btn" data-filter="c" aria-pressed="false">오피스 루틴 · 장비 (9)</button>
+        </div>
+
+        <div class="empty-msg" id="empty-msg">
+          일치하는 영상 번호가 없습니다. <strong>001 ~ 018</strong> 사이의 번호나 키워드를 입력해 주세요.
         </div>
 
         <div class="ep-list" id="episode-list">
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-001" data-ep="001" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">001</span>
+              <span class="ep-num">#001</span>
               <span class="ep-series">시리즈 A · 회의록 10초 컷</span>
             </div>
             <h3 class="ep-title">ChatGPT '요약해줘' 금지! 회의록 10초 컷</h3>
@@ -513,9 +311,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-002" data-ep="002" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">002</span>
+              <span class="ep-num">#002</span>
               <span class="ep-series">시리즈 B · PPT 1분 초안</span>
             </div>
             <h3 class="ep-title">새벽 2시 PPT, 동기는 1분 컷 (무료 AI)</h3>
@@ -528,9 +326,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-003" data-ep="003" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">003</span>
+              <span class="ep-num">#003</span>
               <span class="ep-series">시리즈 C · 오후 3시 각성 루틴</span>
             </div>
             <h3 class="ep-title">오후 3시 식곤증, 1분 보고서 각성 루틴</h3>
@@ -538,13 +336,12 @@
 두서없는 부분을 정리해서 임원 보고용 3단 구조(배경 → 핵심 제안 → 예상 일정)로 깔끔한 초안을 써 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep03" data-target="prompt-ep03">프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep03">오후 각성 추천템 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-004" data-ep="004" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">004</span>
+              <span class="ep-num">#004</span>
               <span class="ep-series">시리즈 C · 손목 보호 음성 입력</span>
             </div>
             <h3 class="ep-title">손목 아픈 야근 탈출! 말로 쓰는 1초 입력</h3>
@@ -555,13 +352,12 @@
 정중하고 간결한 사내 슬랙·이메일 톤으로 바꿔 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep04" data-target="prompt-ep04">단축키·프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep04">손목 보호 장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-005" data-ep="005" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">005</span>
+              <span class="ep-num">#005</span>
               <span class="ep-series">시리즈 C · 이동 중 30초 대응</span>
             </div>
             <h3 class="ep-title">지하철에서 20장 PDF, 폰으로 30초 컷</h3>
@@ -572,13 +368,12 @@
 이 순서대로 정리해 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep05" data-target="prompt-ep05">프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep05">외근 필수템 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-006" data-ep="006" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">006</span>
+              <span class="ep-num">#006</span>
               <span class="ep-series">시리즈 A · 엑셀 수식 1분 컷</span>
             </div>
             <h3 class="ep-title">엑셀 500줄 수식 몰라도 1분 컷</h3>
@@ -591,9 +386,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-007" data-ep="007" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">007</span>
+              <span class="ep-num">#007</span>
               <span class="ep-series">시리즈 B · 원어민 비즈니스 영어</span>
             </div>
             <h3 class="ep-title">퇴근 20분 전 영어 메일, 10초 원어민 톤</h3>
@@ -607,9 +402,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-008" data-ep="008" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">008</span>
+              <span class="ep-num">#008</span>
               <span class="ep-series">시리즈 C · 회의 3연타 5분 정리</span>
             </div>
             <h3 class="ep-title">회의 3연타 야근 탈출! 5분 정리 루틴</h3>
@@ -618,13 +413,12 @@
 2) 담당자·마감일만 깔끔하게 정리해 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep08" data-target="prompt-ep08">프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep08">회의 집중 장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-009" data-ep="009" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">009</span>
+              <span class="ep-num">#009</span>
               <span class="ep-series">시리즈 C · 눈 피로 방지 + 3줄 요약</span>
             </div>
             <h3 class="ep-title">밤 9시 눈 피로 야근, 모니터 시간 반토막</h3>
@@ -635,13 +429,12 @@
 내가 확인해야 할 숫자 항목만 먼저 뽑아줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep09" data-target="prompt-ep09">세팅·프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep09">데스크 조명·장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-010" data-ep="010" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">010</span>
+              <span class="ep-num">#010</span>
               <span class="ep-series">시리즈 C · 오후 1시 30분 타임블록</span>
             </div>
             <h3 class="ep-title">오후 1시 할 일 15개, 10초 타임블록</h3>
@@ -649,13 +442,12 @@
 오후 1시부터 30분 단위 타임블록으로 짜줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep10" data-target="prompt-ep10">타임블록 프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep10">집중 데스크템 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-011" data-ep="011" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">011</span>
+              <span class="ep-num">#011</span>
               <span class="ep-series">시리즈 A · 주간업무보고 10초 컷</span>
             </div>
             <h3 class="ep-title">금요일 4시 주간보고, 10초 불금 칼퇴</h3>
@@ -668,9 +460,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-012" data-ep="012" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">012</span>
+              <span class="ep-num">#012</span>
               <span class="ep-series">시리즈 B · 실시간 출처 시장조사</span>
             </div>
             <h3 class="ep-title">검색창 30개 금지! 출처까지 1분 리서치</h3>
@@ -682,9 +474,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-013" data-ep="013" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">013</span>
+              <span class="ep-num">#013</span>
               <span class="ep-series">시리즈 C · 아침 메일 1분 분류</span>
             </div>
             <h3 class="ep-title">출근 메일 80통, 1분 자동 분류 루틴</h3>
@@ -692,13 +484,12 @@
 긴급 답장 건은 정중하고 짧은 답장 초안까지 써 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep13" data-target="prompt-ep13">메일 분류 프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep13">모닝 루틴 장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-014" data-ep="014" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">014</span>
+              <span class="ep-num">#014</span>
               <span class="ep-series">시리즈 C · 오후 3분 데스크 리셋</span>
             </div>
             <h3 class="ep-title">오후 책상 난장판, 3분 리셋 2배 집중</h3>
@@ -709,13 +500,12 @@
 예상 소요 시간만 10초 안에 순서대로 뽑아 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep14" data-target="prompt-ep14">체크리스트 프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep14">데스크 정리 장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="c">
+          <article class="ep-card" id="ep-015" data-ep="015" data-group="c">
             <div class="ep-meta">
-              <span class="ep-num">015</span>
+              <span class="ep-num">#015</span>
               <span class="ep-series">시리즈 C · 퇴근 5분 전 셧다운</span>
             </div>
             <h3 class="ep-title">퇴근 후 일 걱정 끝! 5분 셧다운 루틴</h3>
@@ -724,13 +514,12 @@
 딱 3줄 인수인계 메모로 만들어 줘.</div>
             <div class="ep-actions">
               <button type="button" class="btn btn-primary copy-btn" id="copy-ep15" data-target="prompt-ep15">3줄 메모 프롬프트 복사</button>
-              <a class="btn btn-ghost" href="#gear" id="link-ep15">퇴근 루틴 장비 보기</a>
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-016" data-ep="016" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">016</span>
+              <span class="ep-num">#016</span>
               <span class="ep-series">시리즈 A · 1페이지 기획안 30초 컷</span>
             </div>
             <h3 class="ep-title">1장 기획서, 30초 4단 초안 공식</h3>
@@ -742,9 +531,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-017" data-ep="017" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">017</span>
+              <span class="ep-num">#017</span>
               <span class="ep-series">시리즈 B · 세미나 10초 5줄 요약</span>
             </div>
             <h3 class="ep-title">1시간 세미나 영상, 10초 5줄 보고서</h3>
@@ -756,9 +545,9 @@
             </div>
           </article>
 
-          <article class="ep-card" data-group="ab">
+          <article class="ep-card" id="ep-018" data-ep="018" data-group="ab">
             <div class="ep-meta">
-              <span class="ep-num">018</span>
+              <span class="ep-num">#018</span>
               <span class="ep-series">시리즈 A · 컴플레인 3단 답장</span>
             </div>
             <h3 class="ep-title">거래처 컴플레인 메일, 10초 정중 답장</h3>
@@ -772,60 +561,13 @@
         </div>
       </section>
 
-      <!-- Section 2: Office Survival Gear (Affiliate Slots) -->
-      <section class="block" id="gear">
-        <div class="section-head">
-          <h2>직장인 오피스 생존템 (제휴 추천)</h2>
-        </div>
-        <p class="section-sub">영상 속 실무 루틴에서 실제로 자주 묻는 장비만 추렸습니다. (아래 링크에 쿠팡파트너스·제휴 URL 연결)</p>
+      <!-- 제휴/광고 상품 섹션은 실제 제휴 링크 등록 전까지 숨김 처리 -->
+      <section class="block" id="gear" hidden aria-hidden="true"></section>
 
-        <div class="gear-list">
-          <div class="gear-item">
-            <div class="gear-info">
-              <div class="gear-cat">EP.03 · 오후 각성 루틴</div>
-              <div class="gear-name">저당 콜드브루 / 직장인 텀블러</div>
-              <div class="gear-why">오후 3시 식곤증 방어 + 책상 위 결로 없는 보냉</div>
-            </div>
-            <a href="#sponsor" class="btn btn-ghost" id="aff-coffee" data-slot="affiliate-coffee">추천 링크 연결</a>
-          </div>
-
-          <div class="gear-item">
-            <div class="gear-info">
-              <div class="gear-cat">EP.04 · 손목 보호 세팅</div>
-              <div class="gear-name">버티컬 마우스 &amp; 저소음 키보드</div>
-              <div class="gear-why">하루 8시간 타이핑·클릭 시 손목 꺾임 최소화</div>
-            </div>
-            <a href="#sponsor" class="btn btn-ghost" id="aff-ergo" data-slot="affiliate-ergo">추천 링크 연결</a>
-          </div>
-
-          <div class="gear-item">
-            <div class="gear-info">
-              <div class="gear-cat">EP.04 · 거북목 방지</div>
-              <div class="gear-name">각도 조절 알루미늄 노트북 거치대</div>
-              <div class="gear-why">시선 높이만 맞춰도 오후 어깨 결림 절반 감소</div>
-            </div>
-            <a href="#sponsor" class="btn btn-ghost" id="aff-stand" data-slot="affiliate-stand">추천 링크 연결</a>
-          </div>
-
-          <div class="gear-item">
-            <div class="gear-info">
-              <div class="gear-cat">EP.05 · 외근 · 출근길 대응</div>
-              <div class="gear-name">노이즈캔슬링 이어폰 &amp; 초슬림 보조배터리</div>
-              <div class="gear-why">지하철·카페에서 AI 음성 입력과 급한 자료 처리 필수템</div>
-            </div>
-            <a href="#sponsor" class="btn btn-ghost" id="aff-mobile" data-slot="affiliate-mobile">추천 링크 연결</a>
-          </div>
-        </div>
-
-        <p class="affiliate-note">※ 제휴 링크 연결 시: 이 페이지의 일부 링크는 제휴 마케팅 활동의 일환으로, 이에 따른 일정액의 수수료를 제공받을 수 있습니다.</p>
-      </section>
-
-      <!-- Section 3: Brand Sponsorship / PPL Inquiry -->
       <section class="block" id="sponsor">
         <div class="ppl-panel">
           <h2>브랜드 협찬(PPL) · 비즈니스 문의</h2>
           <p class="ppl-lead">직장인 공감 상황극 안에 제품이 자연스럽게 녹아드는 숏츠 브랜디드 콘텐츠를 제작합니다.</p>
-
           <div class="stat-strip">
             <div class="stat-cell">
               <div class="stat-label">핵심 시청층</div>
@@ -840,34 +582,16 @@
               <div class="stat-val">비속어·과장 0%</div>
             </div>
           </div>
-
-          <form class="ppl-form" id="ppl-inquiry-form">
-            <div>
-              <label for="brand-name">브랜드 / 담당자명</label>
-              <input type="text" id="brand-name" name="brand" placeholder="예: OO커피 마케팅팀 김OO" required />
-            </div>
-            <div>
-              <label for="brand-cat">제품 카테고리</label>
-              <select id="brand-cat" name="category">
-                <option value="커피·음료·영양제">커피 · 에너지드링크 · 영양제</option>
-                <option value="키보드·마우스·데스크테리어">키보드 · 마우스 · 데스크테리어</option>
-                <option value="노트북·모니터·모바일기기">노트북 · 모니터 · 모바일 기기</option>
-                <option value="AI·생산성 앱 / SaaS / 교육">AI · 생산성 앱 / SaaS / 교육</option>
-                <option value="기타 직장인 라이프스타일">기타 직장인 라이프스타일</option>
-              </select>
-            </div>
-            <div>
-              <label for="brand-note">희망 일정 및 한 줄 소개</label>
-              <input type="text" id="brand-note" name="note" placeholder="예: 12월 중순 숏츠 1편 + 고정댓글 링크 연동 희망" />
-            </div>
-            <button type="submit" class="btn btn-yellow" id="submit-ppl-btn">협찬 문의 초안 복사하기</button>
-          </form>
+          <div class="ppl-actions">
+            <a class="btn btn-yellow" href="mailto:30secaiwork@gmail.com?subject=%5B30%EC%B4%88%20AI%20%EC%8B%A4%EB%AC%B4%EC%86%8C%5D%20%EB%B8%8C%EB%9E%9C%EB%93%9C%20%ED%98%91%EC%B0%AC%2FPPL%20%EB%AC%B8%EC%9D%98">이메일로 문의하기</a>
+            <button type="button" class="btn btn-outline-light" id="copy-email-btn">이메일 주소 복사</button>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© 2026 30초 AI 실무소 · All Rights Reserved</p>
+      <p>© 2026 30초 AI 실무소 · 30secaiwork@gmail.com</p>
     </footer>
   </div>
 
@@ -876,7 +600,18 @@
   <script>
     (function () {
       const toast = document.getElementById('toast');
+      const searchInput = document.getElementById('ep-search');
+      const jumpForm = document.getElementById('jump-form');
+      const activeBanner = document.getElementById('active-banner');
+      const activeBannerText = document.getElementById('active-banner-text');
+      const resetBtn = document.getElementById('reset-search');
+      const filterBar = document.getElementById('filter-bar');
+      const listHeader = document.getElementById('list-header');
+      const emptyMsg = document.getElementById('empty-msg');
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const epCards = Array.from(document.querySelectorAll('.ep-card'));
       let toastTimer = null;
+      let activeGroup = 'all';
 
       function showToast(msg) {
         toast.textContent = msg;
@@ -902,44 +637,96 @@
         }
       }
 
-      // Filter buttons
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      const epCards = document.querySelectorAll('.ep-card');
-      filterBtns.forEach((btn) => {
-        btn.addEventListener('click', () => {
-          const target = btn.dataset.filter;
-          filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      function applySearch(rawQuery) {
+        const q = rawQuery.trim();
+        epCards.forEach((c) => c.classList.remove('focused'));
+        if (!q) {
+          activeBanner.classList.remove('show');
+          filterBar.style.display = 'flex';
+          listHeader.style.display = 'flex';
+          emptyMsg.classList.remove('show');
           epCards.forEach((card) => {
-            const match = target === 'all' || card.dataset.group === target;
-            card.hidden = !match;
+            card.hidden = !(activeGroup === 'all' || card.dataset.group === activeGroup);
           });
+          return;
+        }
+
+        const digits = q.replace(/[^0-9]/g, '');
+        const isPureNum = /^#?\d+$/.test(q);
+        let matched = 0;
+
+        epCards.forEach((card) => {
+          let hit = false;
+          if (isPureNum && digits) {
+            hit = card.dataset.ep === digits.padStart(3, '0');
+          } else {
+            hit = card.textContent.toLowerCase().includes(q.toLowerCase());
+          }
+          card.hidden = !hit;
+          if (hit) {
+            matched++;
+            if (isPureNum) card.classList.add('focused');
+          }
+        });
+
+        filterBar.style.display = 'none';
+        listHeader.style.display = 'none';
+        activeBanner.classList.add('show');
+        activeBannerText.textContent = isPureNum
+          ? `#${digits.padStart(3, '0')} 영상 프롬프트`
+          : `"${q}" 검색 결과 (${matched}건)`;
+        emptyMsg.classList.toggle('show', matched === 0);
+      }
+
+      jumpForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        applySearch(searchInput.value);
+        searchInput.blur();
+      });
+
+      searchInput.addEventListener('input', () => applySearch(searchInput.value));
+
+      resetBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        applySearch('');
+        history.replaceState(null, '', window.location.pathname);
+      });
+
+      document.querySelectorAll('.chip').forEach((chip) => {
+        chip.addEventListener('click', () => {
+          const num = chip.dataset.jump;
+          searchInput.value = num;
+          applySearch(num);
         });
       });
 
-      // Prompt copy buttons
+      filterBtns.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          activeGroup = btn.dataset.filter;
+          filterBtns.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+          applySearch('');
+        });
+      });
+
       document.querySelectorAll('.copy-btn').forEach((btn) => {
         btn.addEventListener('click', () => {
           const box = document.getElementById(btn.dataset.target);
-          if (!box) return;
-          copyText(box.textContent.trim(), '프롬프트가 클립보드에 복사되었습니다!');
+          if (box) copyText(box.textContent.trim(), '프롬프트가 클립보드에 복사되었습니다!');
         });
       });
 
-      // PPL inquiry form -> copy structured brief for email
-      const form = document.getElementById('ppl-inquiry-form');
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const brand = document.getElementById('brand-name').value.trim();
-        const cat = document.getElementById('brand-cat').value;
-        const note = document.getElementById('brand-note').value.trim() || '(일정 협의 희망)';
-        const draft = [
-          '[30초 AI 실무소 협찬/PPL 문의]',
-          `• 브랜드/담당자: ${brand}`,
-          `• 카테고리: ${cat}`,
-          `• 희망 내용: ${note}`,
-        ].join('\n');
-        copyText(draft, '문의 초안이 복사되었습니다! 채널 이메일로 보내주세요.');
+      document.getElementById('copy-email-btn').addEventListener('click', () => {
+        copyText('30secaiwork@gmail.com', '협찬 문의 이메일이 복사되었습니다!');
       });
+
+      // Support ?ep=12 or #012 deep links
+      const params = new URLSearchParams(window.location.search);
+      const deepEp = params.get('ep') || window.location.hash.replace('#', '');
+      if (deepEp && /^\d{1,3}$/.test(deepEp)) {
+        const padded = deepEp.padStart(3, '0');
+        searchInput.value = padded;
+        applySearch(padded);
+      }
     })();
   </script>
 </body>
