@@ -252,6 +252,26 @@
     }
     .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     @media (max-width: 440px) { .stat-strip { grid-template-columns: 1fr; } }
+
+    /* Owner Live Analytics Panel (?stats=1) */
+    .stats-panel {
+      display: none;
+      background: #111318; color: #FFFFFF;
+      border-radius: 16px; padding: 20px; margin-top: 18px;
+      border: 2px solid var(--accent);
+    }
+    .stats-panel.show { display: block; }
+    .stats-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .stats-top h2 { font-size: 16px; font-weight: 900; color: var(--accent); }
+    .stats-kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+    .kpi-box { background: rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; text-align: center; }
+    .kpi-num { font-size: 20px; font-weight: 900; color: #FFFFFF; }
+    .kpi-lbl { font-size: 11px; color: #94A3B8; margin-top: 2px; }
+    .stats-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .stats-table th { text-align: left; color: #94A3B8; padding: 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .stats-table td { padding: 6px 4px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .stats-table td.num { text-align: right; font-weight: 800; color: var(--accent); }
+
   </style>
 </head>
 <body>
@@ -287,6 +307,22 @@
     </header>
 
     <main>
+    <section class="stats-panel" id="owner-stats-panel" aria-live="polite">
+      <div class="stats-top">
+        <h2>📊 실시간 클릭 · 복사 대시보드 (관리자 전용)</h2>
+        <span style="font-size:11px;color:#94A3B8;" id="stats-status">집계 불러오는 중...</span>
+      </div>
+      <div class="stats-kpis">
+        <div class="kpi-box"><div class="kpi-num" id="kpi-views">-</div><div class="kpi-lbl">총 페이지 방문</div></div>
+        <div class="kpi-box"><div class="kpi-num" id="kpi-copies">-</div><div class="kpi-lbl">총 프롬프트 복사</div></div>
+        <div class="kpi-box"><div class="kpi-num" id="kpi-sponsor">-</div><div class="kpi-lbl">협찬 문의 클릭</div></div>
+      </div>
+      <table class="stats-table">
+        <thead><tr><th>번호 · 제목</th><th style="text-align:right;">복사</th><th style="text-align:right;">영상클릭</th><th style="text-align:right;">툴이동</th></tr></thead>
+        <tbody id="stats-tbody"></tbody>
+      </table>
+    </section>
+
       <div class="active-banner" id="active-banner">
         <span id="active-banner-text">#001 결과</span>
         <button type="button" class="reset-btn" id="reset-search">전체 보기 (18)</button>
@@ -741,6 +777,79 @@
         searchInput.value = padded;
         applySearch(padded);
       }
+
+      // Cloud Click & Copy Tracking (Abacus CORS counter — zero signup, ?stats=1 owner view)
+      const NS = '30sec-ai-work-prod';
+      const isStatsMode = new URLSearchParams(window.location.search).get('stats') === '1';
+
+      function trackHit(key) {
+        if (isStatsMode) return;
+        fetch(`https://abacus.jasoncameron.dev/hit/${NS}/${key}`, { mode: 'cors', keepalive: true }).catch(() => {});
+      }
+
+      async function getCount(key) {
+        try {
+          const r = await fetch(`https://abacus.jasoncameron.dev/get/${NS}/${key}`, { mode: 'cors' });
+          if (!r.ok) return 0;
+          const d = await r.json();
+          return d.value || 0;
+        } catch {
+          return 0;
+        }
+      }
+
+      // 1) Pageview
+      trackHit('pageviews');
+
+      // 2) Hook copy / youtube / external tool / sponsor clicks
+      epCards.forEach((card) => {
+        const ep = card.dataset.ep;
+        const cBtn = card.querySelector('.copy-btn');
+        if (cBtn) cBtn.addEventListener('click', () => { trackHit(`copy_${ep}`); trackHit('total_copies'); });
+        const yBtn = card.querySelector('.yt-pill');
+        if (yBtn) yBtn.addEventListener('click', () => trackHit(`yt_${ep}`));
+        const tBtn = card.querySelector('a.btn-ghost');
+        if (tBtn) tBtn.addEventListener('click', () => trackHit(`tool_${ep}`));
+      });
+
+      document.querySelectorAll('#sponsor a, #copy-email-btn').forEach((el) => {
+        el.addEventListener('click', () => trackHit('sponsor_clicks'));
+      });
+
+      // 3) Render live dashboard when ?stats=1
+      if (isStatsMode) {
+        const panel = document.getElementById('owner-stats-panel');
+        panel.classList.add('show');
+        (async () => {
+          const [views, copies, sponsor] = await Promise.all([
+            getCount('pageviews'),
+            getCount('total_copies'),
+            getCount('sponsor_clicks'),
+          ]);
+          document.getElementById('kpi-views').textContent = views.toLocaleString();
+          document.getElementById('kpi-copies').textContent = copies.toLocaleString();
+          document.getElementById('kpi-sponsor').textContent = sponsor.toLocaleString();
+
+          const rows = [];
+          for (const card of epCards) {
+            const ep = card.dataset.ep;
+            const title = card.querySelector('.ep-title')?.textContent.trim() || ep;
+            const [c, y, t] = await Promise.all([
+              getCount(`copy_${ep}`),
+              getCount(`yt_${ep}`),
+              getCount(`tool_${ep}`),
+            ]);
+            rows.push({ ep, title, c, y, t });
+          }
+          rows.sort((a, b) => (b.c + b.t + b.y) - (a.c + a.t + a.y));
+          const tbody = document.getElementById('stats-tbody');
+          tbody.innerHTML = rows.map((r) =>
+            `<tr><td><strong>#${r.ep}</strong> ${r.title.slice(0, 18)}</td><td class="num">${r.c}</td><td class="num">${r.y}</td><td class="num">${r.t}</td></tr>`
+          ).join('');
+          document.getElementById('stats-status').textContent = '실시간 집계 완료';
+        })();
+      }
+
     })();
   </script>
 </body>
